@@ -1,0 +1,6 @@
+flask
+cherrypy
+requests
+pathlib
+regex
+flask-login
