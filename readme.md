@@ -1,34 +1,25 @@
-## Development Tool
-```visual studio code```
+##FIRST
 
-## Bulletin Service
+* Configure system environment on Windows OS
+* Download Pyhton from visualstudio code extensions
+* Download npm from visualstudio code extensions
 
-Project includes Bulletin and SLA services for smcc.
-
-## Other Microservice Integrations
-
-- AuthenticationService
-
-## Unit Test 
-
-Run Project and enter below code to Command Prompt Console
+##SECOND
 
 ```
-python D:\\githubProjects\\BulletinService\\tests\\bulletins.py
-.
-.
-.
-```
+-- pylibs folder right click open in terminal
 
-## Installation
-Operating System is **CentOS Minimal**
+python -m pip install --upgrade pip
+pip list
+pip install pep8
+pip install autopep8
+pip install pylint
+pip install django
+pip install djangorestframework
 
-```
-$ pwd #root
-$ mkdir app
-$ cd app
-$ vi Dockerfile #paste project dockerfile commands
-$ docker build -t bulletinservice:tag .
-$ docker run -p 4004:80 bulletinservice:tag
-$ docker container ls --all
+virtual env
+. env/Scripts/activate.bat
+
+
+
 ```
