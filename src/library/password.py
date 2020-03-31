@@ -10,7 +10,7 @@ import re
 # generates five uppercase, 5 lowercase, 3 digits and 2 punctuation
 #print('Your Random String-2:', get_random_string(5, 5, 3, 2))
 
-class PasswordGenerator():
+class CustomPasswordGenerator:
 
     def get_random_string(self,uchars = 3, lchars = 3, dchars = 2, schars = 2):
         # Generates a 10 characters long random string

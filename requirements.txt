@@ -1,6 +1,6 @@
-flask
-cherrypy
+cmd
 requests
 pathlib
 regex
-flask-login
+graypy
+py-zabbix

@@ -5,7 +5,7 @@ import sqlite3
 class BulletinProcedures():
     
     def __init__(self):
-        self.conn = sqlite3.connect("models/bulletinservice.db")
+        self.conn = sqlite3.connect("src/data/pylibs.db")
 
     def __del__(self):
         self.conn.close()   

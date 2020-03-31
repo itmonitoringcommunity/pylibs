@@ -1,10 +1,10 @@
-##FIRST
+## FIRST
 
 * Configure system environment on Windows OS
 * Download Pyhton from visualstudio code extensions
 * Download npm from visualstudio code extensions
 
-##SECOND
+## SECOND
 
 ```
 -- pylibs folder right click open in terminal
@@ -15,6 +15,6 @@ pip install -r requirements.txt
 virtual env
 . env/Scripts/activate.bat
 
-
+python app.py
 
 ```

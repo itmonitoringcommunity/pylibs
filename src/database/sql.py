@@ -11,8 +11,8 @@ class sqlthread (threading.Thread):
         threading.Thread.__init__(self)
  
     def run (self):
-        dbfile="models/bulletinservice.db"
-        sqlfile="models/bulletinservice.sql"
+        dbfile="src/database/pylibs.db"
+        sqlfile="src/database/data.sql"
         DBCreation(dbfile,sqlfile)
         
 class DBCreation:
@@ -47,7 +47,8 @@ class DBCreation:
                 self.conn.commit()
             except sqlite3.OperationalError:
                 print("Command skipped: ", sqlite3.OperationalError)
-    
+                
+        print("Press enter")
     
     def create_connection(self,db_file):
         """ create a database connection to a SQLite database """
