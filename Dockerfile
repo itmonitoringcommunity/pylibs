@@ -1,5 +1,5 @@
 FROM centos:centos7
-MAINTAINER itmonitoringcommunity <itmonitoringcommunity@gmail.com>
+MAINTAINER smiley-py <itmonitoringcommunity@gmail.com>
 LABEL author="oguz burak karagoz" \
 	  mail="oguzkaragoz@gmail.com"
 
@@ -11,7 +11,7 @@ yum -y install git && \
 yum clean all
 
 # Install Python and Basic Python Tools and Git
-RUN git clone "https://github.com/itmonitoringcommunity/pylibs.git"
+RUN git clone "https://github.com/smiley-py/pylibs.git"
 RUN pip install pip --upgrade
 RUN pip install -r /pylibs/requirements.txt
 
