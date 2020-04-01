@@ -3,6 +3,8 @@ import src.menutext as m,src.authentication as a
 from src.library import *
 from src.database import sql
 
+api = a.CustomApi()
+service = CustomScheduled()
 
 class MyShell(cmd.Cmd, object):
     intro = 'Welcome to the service shell.   Type help or ? to list commands.\n'
@@ -22,29 +24,39 @@ class MyShell(cmd.Cmd, object):
         username = input('Please enter username: ')
         password = getpass.getpass(prompt='Please enter password: ')
         
-        if a.login(username,password) == True:
-            print('Welcome..!!!')
-        else:
-            print('The answer entered by you is incorrect..!!!')
+        api.login('http://127.0.0.1:8000/rest-auth/login/',username,password)
+        print(api.msg)
         
     def do_logout(self, line):
-        print(line)
-        print('Good Bye..!!!')
+        api.logout()
+        print(api.msg)
     
     def do_start(self, line):
-        print(line)
-        print('Scheduler Service started')
+        if api.is_login==0:
+            print('Please login before service started')
+        else:
+            service.start()
+            print('Scheduler Service started')
         
     def do_restart(self, line):
-        print(line)
-        print('Schedular Service restarted')
+        if api.is_login==0:
+            print('Please login before service restarted')
+        else:
+            service.restart()
+            print('Schedular Service restarted')
     
     def do_stop(self, line):
-        print('Schedular Service stopped')
+        if api.is_login==0:
+            print('Please login before service stopped')
+        else:
+            service.stop()
+            print('Schedular Service stopped')
         
     def do_reset_config(self, line):
-        print(line)
-        print('All System Config was reset')
+        if api.is_login==0:
+            print('Please login before reset configuration')
+        else:
+            print('All System Config was reset')
     
     def do_prompt(self, line):
         "Change the interactive prompt"
@@ -72,9 +84,7 @@ class MyShell(cmd.Cmd, object):
                 print("^C")
     
     
-
-
-
+# ----- out of class -----
 
 def parse(arg):
     'Convert a series of zero or more numbers to an argument tuple'

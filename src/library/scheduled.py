@@ -12,6 +12,7 @@ class CustomScheduled():
         self.thread_b = CustomThread(1, "Thread-1", 6)  # for each 6 seconds
         self.thread_a = CustomThread(2, "Thread-2", 6)  # for each 6 seconds
         self.thread_c = CustomThread(3, "Thread-3", 6)  # for each 6 seconds
+        self.msg=""
 
     def start(self):   
         try:
@@ -19,9 +20,9 @@ class CustomScheduled():
             self.thread_a.start()
             self.thread_c.start()
         except Exception as e:
-            return print({"status":"false","message":e})
+            self.msg={"status":"false","message":e}
         
-        return print({"status":"true","value":"Scheduler Service is started"})
+        self.msg={"status":"true","message":"Scheduler Service is started"}
 
     def stop(self):
         try:
@@ -29,9 +30,9 @@ class CustomScheduled():
             self.thread_a.stop()
             self.thread_c.stop()
         except Exception as e:
-            return print({"status":"false","message":e})
+            self.msg={"status":"false","message":e}
         
-        return print({"status":"true","value":"Scheduler Service is stopped"})
+        self.msg={"status":"true","message":"Scheduler Service is stopped"}
 
     def restart(self):
         try:
@@ -39,9 +40,9 @@ class CustomScheduled():
             self.thread_a.restart()
             self.thread_c.restart()
         except Exception as e:
-            return print({"status":"false","message":e})
+            self.msg={"status":"false","message":e}
         
-        return print({"status":"true","value":"Scheduler Service is restarted"})
+        self.msg={"status":"true","message":"Scheduler Service is restarted"}
 
 
 
