@@ -1,4 +1,5 @@
+env
 src/database/pylibs.db
 **/*.pyc
-/env
+
 
