@@ -47,12 +47,12 @@ class CustomApi():
                 
             
         except requests.exceptions.HTTPError as errh:
-            self.msg ="Http Error: " + errh
+            self.msg ="Http Error: " + str(errh)
         except requests.exceptions.ConnectionError as errc:
-            self.msg ="Error Connecting: " + errc
+            self.msg ="Error Connecting: " + str(errc)
         except requests.exceptions.Timeout as errt:
-            self.msg ="Timeout Error: " + errt
+            self.msg ="Timeout Error: " + str(errt)
         except requests.exceptions.RequestException as err:
-            self.msg ="OOps: Something Else " + err
+            self.msg ="OOps: Something Else " + str(err)
 
         

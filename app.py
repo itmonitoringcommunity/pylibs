@@ -1,7 +1,5 @@
 import os,sys,cmd,getpass
-import src.menutext as m,src.authentication as a
-from src.library import *
-from src.database import sql
+from src import * 
 
 api = a.CustomApi()
 service = CustomScheduled()

@@ -10,9 +10,9 @@
 -- pylibs folder right click open in terminal
 
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 
-virtual env
+python -m venv env
 . env/Scripts/activate.bat
 
 python app.py
