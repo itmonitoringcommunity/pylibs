@@ -1,3 +1,4 @@
-import src.menu as m,src.auth as a
+from src.menu import *
+from src.auth import *
 from src.library import *
 from src.database import sql

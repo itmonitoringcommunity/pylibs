@@ -1,3 +1,6 @@
+## DESCRIPTION
+This application provides sending mail with scheduled process periodically in a terminal console.
+
 ## FIRST
 
 * Configure system environment on Windows OS
@@ -18,3 +21,13 @@ python -m venv env
 python app.py
 
 ```
+
+## THIRD
+
+Enable gmail smtp settings
+
+https://mail.google.com/mail/u/0/#settings/fwdandpop
+
+https://myaccount.google.com/lesssecureapps
+
+https://accounts.google.com/DisplayUnlockCaptcha

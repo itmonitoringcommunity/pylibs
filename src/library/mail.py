@@ -14,11 +14,11 @@ from email.mime.text import MIMEText
 
 class CustomMail():
     def __init__(self):
-        self.msg = ""
+        self.msg = ''
 
     def send_mail_with_files(self, kwargs, attachments=None):
         msg = MIMEMultipart()
-        msg['From'] = kwargs["user_mail"]
+        msg['From'] = kwargs["username"]
         msg['To'] = kwargs["tolist"]
         msg['Cc'] = kwargs["cclist"]
         msg['Bcc'] = kwargs["bcclist"]
@@ -42,13 +42,13 @@ class CustomMail():
             server.ehlo()
             server.starttls()
             server.ehlo()
-            server.login(kwargs["user_mail"], kwargs["password"])
+            server.login(kwargs["username"], kwargs["password"])
 
             # maili gönderiyoruz. Aldığı parametreler gonderenin mail adresi, alıcının mail adresi, ve mail içeriği
             recipients = kwargs["cclist"].split(
                 ",") + kwargs["bcclist"].split(",") + [kwargs["tolist"]]
             # print(recipients)
-            server.sendmail(kwargs["user_mail"], recipients, msg.as_string())
+            server.sendmail(kwargs["username"], recipients, msg.as_string())
             server.quit()
             self.msg = "Notification mail is sent successfuly."
         except smtplib.SMTPException as e:
@@ -56,7 +56,7 @@ class CustomMail():
 
     def send_mail(self, kwargs, attachments=None):
         msg = MIMEMultipart()
-        msg['From'] = kwargs["user_mail"]
+        msg['From'] = kwargs["username"]
         msg['To'] = kwargs["tolist"]
         msg['Cc'] = kwargs["cclist"]
         msg['Bcc'] = kwargs["bcclist"]
@@ -79,13 +79,13 @@ class CustomMail():
             server.ehlo()
             server.starttls()
             server.ehlo()
-            server.login(kwargs["user_mail"], kwargs["password"])
+            server.login(kwargs["username"], kwargs["password"])
 
             # maili gönderiyoruz. Aldığı parametreler gonderenin mail adresi, alıcının mail adresi, ve mail içeriği
             recipients = kwargs["cclist"].split(
                 ",") + kwargs["bcclist"].split(",") + [kwargs["tolist"]]
             # print(recipients)
-            server.sendmail(kwargs["user_mail"], recipients, msg.as_string())
+            server.sendmail(kwargs["username"], recipients, msg.as_string())
             server.quit()
 
             self.msg = "Notification mail is sent successfuly."

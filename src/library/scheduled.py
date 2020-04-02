@@ -2,10 +2,9 @@
 import threading
 import time
 
+from .mail import *
 
-def send_notifications():
-    text = ""
-    return text
+mail = CustomMail()
 
 
 class CustomScheduled():
@@ -13,7 +12,23 @@ class CustomScheduled():
         self.thread_b = CustomThread(1, "Thread-1", 6)  # for each 6 seconds
         self.thread_a = CustomThread(2, "Thread-2", 6)  # for each 6 seconds
         self.thread_c = CustomThread(3, "Thread-3", 6)  # for each 6 seconds
-        self.msg = ""
+        self.msg = ''
+
+    def send_notifications(self, title, content):
+        kwargs = {
+            'smtp': 'smtp.gmail.com',
+            'port': '587',
+            'username': 'itmonitoringcommunity@gmail.com',
+            'password': 'MonitoringCommunity18',
+            'tolist': 'oguzkaragoz@gmail.com',
+            'cclist': 'itmonitoringcommunity@gmail.com',
+            'bcclist': '',
+            'subject': title,
+            'body': content
+        }
+
+        mail.send_mail(kwargs)
+        print(mail.msg)
 
     def start(self):
         try:
@@ -65,8 +80,8 @@ class CustomThread (threading.Thread):
         threading.Thread.start(self)
 
     def run(self):
-        #print("Starting " + self.name)
+        # print("Starting " + self.name)
         while not self.stoprequest.isSet():
-            send_notifications()
+            # print("Notification " + str(datetime.datetime.now()))
+            # send_notifications('test title', 'test content')
             time.sleep(self.delay)
-            #print("Notification " + str(datetime.datetime.now()))
