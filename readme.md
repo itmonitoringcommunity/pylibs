@@ -1,5 +1,5 @@
 ## DESCRIPTION
-This application provides sending mail with scheduled process periodically in a terminal console.
+This application provides sending mail with scheduled process periodically in a terminal console. It is possible to use many python libraries.
 
 ## FIRST
 
