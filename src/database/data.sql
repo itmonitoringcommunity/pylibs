@@ -20,7 +20,9 @@ CREATE TABLE IF NOT EXISTS bulletins (
     ticket_case_url text DEFAULT '#',
     ticket_case_id text,
 
+    resolved_time datetime DEFAULT CURRENT_TIMESTAMP, 
     is_resolved integer DEFAULT 0,
+    resolved_by text,
     temporary_solution text,
     permanent_solution text,
     root_cause text,
@@ -34,37 +36,11 @@ INSERT INTO bulletins(id,type,priority,state,color,
 created_by,code,title,detail,effect,contact,
 begin_time,end_time,duration,
 ticket_case_url,ticket_case_id,
-is_resolved, temporary_solution, permanent_solution, root_cause
+is_resolved, resolved_by, temporary_solution, permanent_solution, root_cause
 ) 
 VALUES(1,'Planned Maintenance','Medium','Scheduled','#',
 'admin','BLT20023','Test Bakımı','13:00 da sql db bakımı yapılacaktır.','local services','oguzkaragoz@gmail.com',
 '2020-04-02 13:00:00','2020-04-02 14:20:00',80,
 '#','PM120023',
-0,'temporary_solution','permanent_solution','root_cause'
-);
-
-INSERT INTO bulletins(id,type,priority,state,color,
-created_by,code,title,detail,effect,contact,
-begin_time,end_time,duration,
-ticket_case_url,ticket_case_id,
-is_resolved, temporary_solution, permanent_solution, root_cause
-) 
-VALUES(2,'Planned Maintenance','Medium','Scheduled','#',
-'admin','BLT20024','Test Bakımı','13:00 da sql db bakımı yapılacaktır.','local services','oguzkaragoz@gmail.com',
-'2020-04-02 13:00:00','2020-04-02 14:20:00',80,
-'#','PM120024',
-0,'','',''
-);
-
-INSERT INTO bulletins(id,type,priority,state,color,
-created_by,code,title,detail,effect,contact,
-begin_time,end_time,duration,
-ticket_case_url,ticket_case_id,
-is_resolved, temporary_solution, permanent_solution, root_cause
-) 
-VALUES(3,'Planned Maintenance','Medium','Scheduled','#',
-'admin','BLT20025','Test Bakımı','13:00 da sql db bakımı yapılacaktır.','local services','oguzkaragoz@gmail.com',
-'2020-04-02 13:00:00','2020-04-02 14:20:00',80,
-'#','PM120025',
-0,'','',''
+0,'admin','temporary_solution','permanent_solution','root_cause'
 );

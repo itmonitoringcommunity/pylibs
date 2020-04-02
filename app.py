@@ -7,6 +7,7 @@ from src import *
 menu = CustomMenu()
 api = CustomApi()
 service = CustomScheduled()
+bulletin = CustomBulletin()
 
 
 class MyShell(cmd.Cmd, object):
@@ -18,6 +19,9 @@ class MyShell(cmd.Cmd, object):
         'Write somethings title content'
         print(parse(arg))
         service.send_notifications(parse(arg)[0], parse(arg)[1])
+
+    def do_sendbulletin(self, arg):
+        bulletin.send_bulletin()
 
     def do_help(self, line):
         for item in menu.get_help_text():
