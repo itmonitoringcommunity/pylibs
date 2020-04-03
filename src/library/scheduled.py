@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import threading
+import datetime
 import time
 
 from .mail import *
@@ -82,6 +83,6 @@ class CustomThread (threading.Thread):
     def run(self):
         # print("Starting " + self.name)
         while not self.stoprequest.isSet():
-            # print("Notification " + str(datetime.datetime.now()))
+            print("Scheduler ", self.name, " ", str(datetime.datetime.now()))
             # send_notifications('test title', 'test content')
             time.sleep(self.delay)

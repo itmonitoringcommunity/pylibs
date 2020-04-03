@@ -4,10 +4,7 @@ import cmd
 import getpass
 from src import *
 
-menu = CustomMenu()
-api = CustomApi()
-service = CustomScheduled()
-bulletin = CustomBulletin()
+# api.is_login = 1
 
 
 class MyShell(cmd.Cmd, object):
@@ -18,7 +15,7 @@ class MyShell(cmd.Cmd, object):
     def do_writemail(self, arg):
         'Write somethings title content'
         print(parse(arg))
-        service.send_notifications(parse(arg)[0], parse(arg)[1])
+        service1.send_notifications(parse(arg)[0], parse(arg)[1])
 
     def do_sendbulletin(self, arg):
         bulletin.send_bulletin()
@@ -43,21 +40,24 @@ class MyShell(cmd.Cmd, object):
         if api.is_login == 0:
             print('Please login before service started')
         else:
-            service.start()
+            service1.start()
+            service2.start()
             print('Scheduler Service started')
 
     def do_restart(self, line):
         if api.is_login == 0:
             print('Please login before service restarted')
         else:
-            service.restart()
+            # service1.restart()
+            service2.restart()
             print('Schedular Service restarted')
 
     def do_stop(self, line):
         if api.is_login == 0:
             print('Please login before service stopped')
         else:
-            service.stop()
+            service1.stop()
+            service2.stop()
             print('Schedular Service stopped')
 
     def do_reset_config(self, line):
