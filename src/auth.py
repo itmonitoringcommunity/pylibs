@@ -14,6 +14,7 @@ class CustomApi():
 
     def logout(self,):
         self.is_login = 0
+        self.token = ''
         self.msg = 'Good Bye..!!!'
 
     def api_login(self, url, username, password):

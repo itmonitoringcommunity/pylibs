@@ -4,7 +4,7 @@ import cmd
 import getpass
 from src import *
 
-# api.is_login = 1
+# api.token = '288fdafc07bf9783b6690e64266bc5fb29f07dda'
 
 
 class MyShell(cmd.Cmd, object):
@@ -37,7 +37,7 @@ class MyShell(cmd.Cmd, object):
         print(api.msg)
 
     def do_start(self, line):
-        if api.is_login == 0:
+        if (api.token is ''):
             print('Please login before service started')
         else:
             service1.start()
@@ -45,15 +45,15 @@ class MyShell(cmd.Cmd, object):
             print('Scheduler Service started')
 
     def do_restart(self, line):
-        if api.is_login == 0:
+        if (api.token is ''):
             print('Please login before service restarted')
         else:
-            # service1.restart()
+            service1.restart()
             service2.restart()
             print('Schedular Service restarted')
 
     def do_stop(self, line):
-        if api.is_login == 0:
+        if (api.token is ''):
             print('Please login before service stopped')
         else:
             service1.stop()
@@ -61,7 +61,7 @@ class MyShell(cmd.Cmd, object):
             print('Schedular Service stopped')
 
     def do_reset_config(self, line):
-        if api.is_login == 0:
+        if (api.token is not ''):
             print('Please login before reset configuration')
         else:
             print('All System Config was reset')
