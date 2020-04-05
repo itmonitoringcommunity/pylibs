@@ -37,8 +37,8 @@ https://accounts.google.com/DisplayUnlockCaptcha
 ## FORTH
 
 ```
-docker build -t backend .
-docker run -it backend
-docker rmi backend .
+docker build -t pylibs .
+docker run -it pylibs
+docker rmi pylibs .
 
 ```
