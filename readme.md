@@ -32,3 +32,13 @@ https://mail.google.com/mail/u/0/#settings/fwdandpop
 https://myaccount.google.com/lesssecureapps
 
 https://accounts.google.com/DisplayUnlockCaptcha
+
+
+## FORTH
+
+```
+docker build -t backend .
+docker run -it backend
+docker rmi backend .
+
+```

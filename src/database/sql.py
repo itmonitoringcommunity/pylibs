@@ -1,40 +1,44 @@
 # -*- coding: utf-8 -*-
 
-import sqlite3,threading
+import sqlite3
+import threading
 from sqlite3 import Error
 from pathlib import Path
 
 # Our thread class
+
+
 class sqlthread (threading.Thread):
- 
+
     def __init__(self):
         threading.Thread.__init__(self)
- 
-    def run (self):
-        dbfile="src/database/pylibs.db"
-        sqlfile="src/database/data.sql"
-        DBCreation(dbfile,sqlfile)
-        
+
+    def run(self):
+        dbfile = "src/database/pylibs.db"
+        sqlfile = "src/database/data.sql"
+        DBCreation(dbfile, sqlfile)
+
+
 class DBCreation:
 
-    def __init__(self,dbfile,sqlfile):        
+    def __init__(self, dbfile, sqlfile):
         my_file = Path(dbfile)
-        if my_file.is_file()==False:
+        if my_file.is_file() is False:
             # file not exists
             self.create_connection(dbfile)
             self.executeScriptsFromFile(sqlfile)
             self.conn.close()
-    
-    def executeScriptsFromFile(self,filename):
+
+    def executeScriptsFromFile(self, filename):
         # Open and read the file as a single buffer
         fd = open(filename, 'r')
         sqlFile = fd.read()
         fd.close()
-    
-        # all SQL commands (split on ';'       
-        sqlCommands = sqlFile.replace('\n','').replace('\t','').replace('    ',' ').split(';')
-        
-        
+
+        # all SQL commands (split on ';'
+        sqlCommands = sqlFile.replace('\n', '').replace(
+            '\t', '').replace('    ', ' ').split(';')
+
         # Execute every command from the input file
         for command in sqlCommands[0:-1]:
             print(command + ' \n\n')
@@ -47,17 +51,17 @@ class DBCreation:
                 self.conn.commit()
             except sqlite3.OperationalError:
                 print("Command skipped: ", sqlite3.OperationalError)
-                
+
         print("Press enter")
-    
-    def create_connection(self,db_file):
+
+    def create_connection(self, db_file):
         """ create a database connection to a SQLite database """
         try:
-            self.conn = sqlite3.connect(db_file)            
+            self.conn = sqlite3.connect(db_file)
             print(sqlite3.version)
         except Error as e:
             print(e)
- 
+
+
 def start():
     sqlthread().start()
-        

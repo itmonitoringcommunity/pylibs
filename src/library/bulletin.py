@@ -6,6 +6,7 @@ mail = CustomMail()
 class CustomBulletin():
     def __init(self):
         self.htmltext = ''
+        self.msg = ''
 
     def set_bulletin_text(self, kwargs_bulletin):
         self.htmltext = '''
@@ -37,7 +38,7 @@ class CustomBulletin():
                     Type
                 </td>
                 <td style=" text-align: left; margin: 10px; padding: 10px;">
-                    {kwargs[type]}
+                    {kwargs[btype]}
                 </td>
             </tr>
 
@@ -184,7 +185,15 @@ class CustomBulletin():
         kwargs_bulletin = {
             'id': 1,
 
-            'type': 'Planned Maintenance',
+            'smtp': 'smtp.gmail.com',
+            'port': '587',
+            'username': 'itmonitoringcommunity@gmail.com',
+            'password': 'MonitoringCommunity18',
+            'tolist': 'oguzkaragoz@gmail.com',
+            'cclist': 'itmonitoringcommunity@gmail.com',
+            'bcclist': '',
+
+            'btype': 'Planned Maintenance',
             'priority': 'Medium',
             'state': 'Started',
             'color': '#f63c3a',
@@ -218,14 +227,14 @@ class CustomBulletin():
         self.set_bulletin_text(kwargs_bulletin)
 
         kwargs_mail = {
-            'smtp': 'smtp.gmail.com',
-            'port': '587',
-            'username': 'itmonitoringcommunity@gmail.com',
-            'password': 'MonitoringCommunity18',
-            'tolist': 'oguzkaragoz@gmail.com',
-            'cclist': 'itmonitoringcommunity@gmail.com',
-            'bcclist': '',
-            'subject': kwargs_bulletin["code"] + str(' - ') + kwargs_bulletin["title"],
+            'smtp': str(kwargs_bulletin["smtp"]),
+            'port': str(kwargs_bulletin["port"]),
+            'username': str(kwargs_bulletin["username"]),
+            'password': str(kwargs_bulletin["password"]),
+            'tolist': str(kwargs_bulletin["tolist"]),
+            'cclist': str(kwargs_bulletin["cclist"]),
+            'bcclist': str(kwargs_bulletin["bcclist"]),
+            'subject': str(kwargs_bulletin["code"]) + str(' - ') + str(kwargs_bulletin["title"]),
             'body': self.htmltext
         }
 

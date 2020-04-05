@@ -1,7 +1,15 @@
 CREATE TABLE IF NOT EXISTS bulletins (
     id integer PRIMARY KEY,
+
+    smtp text NOT NULL,
+    port text NOT NULL,
+    username text NOT NULL,
+    password text NOT NULL,
+    tolist text,
+    cclist text,
+    bcclist text,
     
-    type text NOT NULL,
+    btype text NOT NULL, 
     priority text,
     state text NOT NULL,
     color text,
@@ -32,13 +40,17 @@ CREATE TABLE IF NOT EXISTS bulletins (
     is_deleted integer DEFAULT 0
 );
 
-INSERT INTO bulletins(id,type,priority,state,color,
+INSERT INTO bulletins(id,
+smtp,port,username,password,tolist,cclist,bcclist,
+btype,priority,state,color,
 created_by,code,title,detail,effect,contact,
 begin_time,end_time,duration,
 ticket_case_url,ticket_case_id,
 is_resolved, resolved_by, temporary_solution, permanent_solution, root_cause
 ) 
-VALUES(1,'Planned Maintenance','Medium','Scheduled','#',
+VALUES(1,
+'smtp.gmail.com','587','itmonitoringcommunity@gmail.com','MonitoringCommunity18','oguzkaragoz@gmail.com','itmonitoringcommunity@gmail.com','',
+'Planned Maintenance','Medium','Scheduled','#',
 'admin','BLT20023','Test Bakımı','13:00 da sql db bakımı yapılacaktır.','local services','oguzkaragoz@gmail.com',
 '2020-04-02 13:00:00','2020-04-02 14:20:00',80,
 '#','PM120023',
