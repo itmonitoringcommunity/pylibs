@@ -1,4 +1,4 @@
-## DESCRIPTION
+## pysched
 
 This application provides automating processes with scheduled process periodically in a terminal console via bulletin-api. It is possible to use many python libraries.
 
