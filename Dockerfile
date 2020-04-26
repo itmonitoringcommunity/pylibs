@@ -11,11 +11,11 @@ yum -y install git && \
 yum clean all
 
 # Install Python and Basic Python Tools and Git
-RUN git clone "https://github.com/smiley-py/pylibs.git"
+RUN git clone "https://github.com/smiley-py/pysched.git"
 RUN pip install pip --upgrade
-RUN pip install -r /pylibs/requirements.txt
+RUN pip install -r /pysched/requirements.txt
 
 EXPOSE 8080
-WORKDIR /pylibs
+WORKDIR /pysched
 
-CMD ["python", "/pylibs/app.py"]
+CMD ["python", "/pysched/app.py"]

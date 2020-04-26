@@ -1,6 +1,6 @@
 ## DESCRIPTION
 
-This application provides sending mail with scheduled process periodically in a terminal console. It is possible to use many python libraries.
+This application provides automating processes with scheduled process periodically in a terminal console via bulletin-api. It is possible to use many python libraries.
 
 ## FIRST
 
@@ -11,7 +11,7 @@ This application provides sending mail with scheduled process periodically in a 
 ## SECOND
 
 ```
--- pylibs folder right click open in terminal
+-- pysched folder right click open in terminal
 
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
@@ -37,8 +37,8 @@ https://accounts.google.com/DisplayUnlockCaptcha
 ## FORTH
 
 ```
-docker build -t pylibs .
-docker run -it pylibs
-docker rmi pylibs .
+docker build -t pysched .
+docker run -it pysched
+docker rmi pysched .
 
 ```
