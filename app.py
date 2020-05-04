@@ -4,7 +4,16 @@ import cmd
 import getpass
 from src import *
 
-# api.token = '288fdafc07bf9783b6690e64266bc5fb29f07dda'
+APIURL = 'http://127.0.0.1:8000/'
+USERNAME = 'admin'
+PASSWORD = 'admin'
+
+api = CustomApi(APIURL)
+api.login(USERNAME, PASSWORD)
+
+menu = CustomMenu()
+service1 = CustomScheduled(api)
+service2 = CustomScheduledCron()
 
 
 class MyShell(cmd.Cmd, object):
@@ -12,14 +21,6 @@ class MyShell(cmd.Cmd, object):
     prompt = '[Shell Prompt] :'
 
     # ----- basic commands -----
-    def do_writemail(self, arg):
-        'Write somethings title content'
-        print(parse(arg))
-        service1.send_notifications(parse(arg)[0], parse(arg)[1])
-
-    def do_sendbulletin(self, arg):
-        bulletin.send_bulletin()
-
     def do_help(self, line):
         for item in menu.get_help_text():
             print(item)
@@ -29,7 +30,7 @@ class MyShell(cmd.Cmd, object):
         username = input('Please enter username: ')
         password = getpass.getpass(prompt='Please enter password: ')
 
-        api.login('http://127.0.0.1:8000/rest-auth/login/', username, password)
+        api.login(username, password)
         print(api.msg)
 
     def do_logout(self, line):
@@ -41,7 +42,7 @@ class MyShell(cmd.Cmd, object):
             print('Please login before service started')
         else:
             service1.start()
-            service2.start()
+            # service2.start()
             print('Scheduler Service started')
 
     def do_restart(self, line):
@@ -49,7 +50,7 @@ class MyShell(cmd.Cmd, object):
             print('Please login before service restarted')
         else:
             service1.restart()
-            service2.restart()
+            # service2.restart()
             print('Schedular Service restarted')
 
     def do_stop(self, line):
@@ -57,7 +58,7 @@ class MyShell(cmd.Cmd, object):
             print('Please login before service stopped')
         else:
             service1.stop()
-            service2.stop()
+            # service2.stop()
             print('Schedular Service stopped')
 
     def do_reset_config(self, line):
@@ -98,6 +99,5 @@ def parse(arg):
 
 
 if __name__ == '__main__':
-    sql.start()
     app = MyShell()
     app.cmdloop()

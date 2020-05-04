@@ -3,39 +3,15 @@ import threading
 import datetime
 import time
 
-from .mail import *
-
-mail = CustomMail()
-
 
 class CustomScheduled():
-    def __init__(self):
-        self.thread_b = CustomThread(1, "Thread-1", 6)  # for each 6 seconds
-        self.thread_a = CustomThread(2, "Thread-2", 6)  # for each 6 seconds
-        self.thread_c = CustomThread(3, "Thread-3", 6)  # for each 6 seconds
+    def __init__(self, API):
+        self.thread_a = CustomThread(1, "Thread-1", API)
         self.msg = ''
-
-    def send_notifications(self, title, content):
-        kwargs = {
-            'smtp': 'smtp.gmail.com',
-            'port': '587',
-            'username': 'itmonitoringcommunity@gmail.com',
-            'password': 'MonitoringCommunity18',
-            'tolist': 'oguzkaragoz@gmail.com',
-            'cclist': 'itmonitoringcommunity@gmail.com',
-            'bcclist': '',
-            'subject': title,
-            'body': content
-        }
-
-        mail.send_mail(kwargs)
-        print(mail.msg)
 
     def start(self):
         try:
-            self.thread_b.start()
             self.thread_a.start()
-            self.thread_c.start()
         except Exception as e:
             self.msg = "" + str(e)
 
@@ -43,9 +19,7 @@ class CustomScheduled():
 
     def stop(self):
         try:
-            self.thread_b.stop()
             self.thread_a.stop()
-            self.thread_c.stop()
         except Exception as e:
             self.msg = "" + str(e)
 
@@ -53,9 +27,7 @@ class CustomScheduled():
 
     def restart(self):
         try:
-            self.thread_b.restart()
             self.thread_a.restart()
-            self.thread_c.restart()
         except Exception as e:
             self.msg = "" + str(e)
 
@@ -63,12 +35,57 @@ class CustomScheduled():
 
 
 class CustomThread (threading.Thread):
-    def __init__(self, threadID, name, delay):
+    def __init__(self, threadID, name, API):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
-        self.delay = delay
+        self.delay = 20
+        self.api = API
+
         self.stoprequest = threading.Event()
+
+    def __check_scheduled_bulletins(self):
+        self.api.get_scheduled_bulletins()
+
+        for bulletin in self.api.scheduledBulletins:
+            if (bulletin["is_automated"] == "1") and (bulletin["state"] == "Scheduled"):
+                dt = datetime.datetime.strptime(bulletin["begin_time"].split('+')[0],
+                                                "%Y-%m-%dT%H:%M:%S")
+
+                if datetime.datetime.now() >= dt:
+                    bulletin["color"] = "#e55353"
+                    bulletin["state"] = "Started"
+                    self.api.bulletin = bulletin
+                    self.api.id = str(bulletin["id"])
+                    self.api.set_bulletin()
+                    self.api.send_bulletin()
+                    print(dt, ' ', self.api.id, ' ', bulletin["code"],
+                          ' Started state was processed.', '\n')
+
+    def __check_started_bulletins(self):
+        self.api.get_started_bulletins()
+
+        for bulletin in self.api.startedBulletins:
+
+            if (bulletin["is_automated"] == "1") and (bulletin["state"] == "Started"):
+                if (bulletin["end_time"] is not None) or (bulletin["end_time"] is not ""):
+                    dt = datetime.datetime.strptime(bulletin["end_time"].split('+')[0],
+                                                    "%Y-%m-%dT%H:%M:%S")
+
+                    if datetime.datetime.now() >= dt:
+                        bulletin["is_automated"] = "0"
+                        bulletin["color"] = "#2eb85c"
+                        bulletin["state"] = "Done"
+                        self.api.bulletin = bulletin
+                        self.api.id = str(bulletin["id"])
+                        self.api.set_bulletin()
+                        self.api.send_bulletin()
+                        print(dt, ' ', self.api.id, ' ', bulletin["code"],
+                              ' Done state was processed.', '\n')
+
+    def run_check_bulletins(self):
+        self.__check_scheduled_bulletins()
+        self.__check_started_bulletins()
 
     def start(self):
         threading.Thread.start(self)
@@ -81,8 +98,6 @@ class CustomThread (threading.Thread):
         threading.Thread.start(self)
 
     def run(self):
-        # print("Starting " + self.name)
         while not self.stoprequest.isSet():
-            print("Scheduler ", self.name, " ", str(datetime.datetime.now()))
-            # send_notifications('test title', 'test content')
+            self.run_check_bulletins()
             time.sleep(self.delay)

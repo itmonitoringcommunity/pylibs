@@ -1,12 +1,11 @@
 ## pysched
 
-This application provides automating processes with scheduled process periodically in a terminal console via bulletin-api. It is possible to use many python libraries.
+This application provides automatic sending processes via bulletin-api. It is possible to use many python libraries.
 
 ## FIRST
 
 * Configure system environment on Windows OS
 * Download Pyhton from visualstudio code extensions
-* Download npm from visualstudio code extensions
 
 ## SECOND
 
