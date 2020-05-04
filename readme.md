@@ -24,17 +24,6 @@ python app.py
 
 ## THIRD
 
-Enable gmail smtp settings
-
-https://mail.google.com/mail/u/0/#settings/fwdandpop
-
-https://myaccount.google.com/lesssecureapps
-
-https://accounts.google.com/DisplayUnlockCaptcha
-
-
-## FORTH
-
 ```
 docker build -t pysched .
 docker run -it pysched
