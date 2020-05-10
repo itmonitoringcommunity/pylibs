@@ -13,8 +13,6 @@ class CustomMenu():
         menu.append("*** Service Shell Help Menu ***\n")
 
         menu.append('exit \t\t close the system')
-        menu.append('writemail \t write mail via the smtp')
-        menu.append('sendbulletin \t send bulletin via mail')
         menu.append('login \t\t login the system')
         menu.append('logout \t\t logout the system')
         menu.append('start \t\t start the scheduled service')

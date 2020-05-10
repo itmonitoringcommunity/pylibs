@@ -61,12 +61,6 @@ class MyShell(cmd.Cmd, object):
             # service2.stop()
             print('Schedular Service stopped')
 
-    def do_reset_config(self, line):
-        if (api.token is not ''):
-            print('Please login before reset configuration')
-        else:
-            print('All System Config was reset')
-
     def do_prompt(self, line):
         "Change the interactive prompt"
         self.prompt = line + ': '
